@@ -5,5 +5,6 @@ export const Wrapper = styled.div`
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  justify-content: center;
+  padding: 16px;
 `
+

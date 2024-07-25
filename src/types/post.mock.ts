@@ -6,7 +6,7 @@ import { mockAuthor } from './author.mock';
 export const mockPost = (args?: any): IPost => ({
   author: mockAuthor(),
   authorId: faker.string.uuid(),
-  categories: [mockCategory()],
+  categories: [mockCategory(), mockCategory()],
   content: faker.lorem.paragraph(),
   createdAt: faker.date.recent(),
   id: faker.string.uuid(),

@@ -69,8 +69,8 @@ export const GlobalStyle = createGlobalStyle`
       outline: none;
     }
 
-    font-family: 'Inter', sans-serif;
-    color: ${colors.black};
+    font-family: 'Open Sans', sans-serif;
+    color: ${colors.grey[100]};
 
     body {
       background: ${colors.white};
@@ -95,14 +95,14 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 `;
 
 export const Col = styled.div<{ span?: number }>`
   display: inline-block;
   position: relative;
   width: 100%;
-  padding: 12px 6px;
+  padding: 16px 8px;
 
   ${({ span }) => span && `
     flex: 0 0 ${(span / 12) * 100}%;
