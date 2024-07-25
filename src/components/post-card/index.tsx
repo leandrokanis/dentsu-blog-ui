@@ -6,7 +6,7 @@ interface Props {
   post: IPost,
 }
 
-const ToggleTimeline: React.FC<Props> = (): JSX.Element => {
+const PostCard: React.FC<Props> = (): JSX.Element => {
 
   return (
     <Wrapper>
@@ -17,4 +17,4 @@ const ToggleTimeline: React.FC<Props> = (): JSX.Element => {
   );
 }
 
-export default ToggleTimeline
+export default PostCard

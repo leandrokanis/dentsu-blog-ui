@@ -1,13 +1,15 @@
 import React from 'react';
 import { Wrapper } from './home.styles';
+import PostCard from '../components/post-card';
+import { mockPost } from '../types/post.mock';
 
 const HomePage: React.FC = (): JSX.Element => {
 
   return (
     <Wrapper>
-      <h1>
-        DWS – Dentsu World Services :: Front End Recruitment Process
-      </h1>
+      <PostCard
+        post={mockPost()}
+      />
     </Wrapper >
   )
 }
