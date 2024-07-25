@@ -4,6 +4,6 @@ export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
-  overflow: hidden;
-  justify-content: center;
+  padding: 16px;
 `
+

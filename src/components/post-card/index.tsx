@@ -1,20 +1,45 @@
 import React from 'react'
-import { Wrapper } from './index.styles'
-import { IPost } from '../../types';
+import { Content, Wrapper, Thumbnail, Info, Title, Excerpt, Categories, Tag } from './index.styles'
+import { IPost } from '../../types'
 
 interface Props {
   post: IPost,
 }
 
-const ToggleTimeline: React.FC<Props> = (): JSX.Element => {
+const PostCard: React.FC<Props> = (props: Props): JSX.Element => {
+  const createAtToString = composeDateToString(props.post.createdAt)
 
   return (
     <Wrapper>
-      {
-        // post content  
-      }
+      <Thumbnail src={props.post.thumbnailUrl} alt={props.post.author.name} />
+
+      <Content>
+        <Info>
+          <span> { createAtToString } </span>
+          <span> { props.post.author.name } </span>
+        </Info>
+
+        <Title> { props.post.title } </Title>
+        <Excerpt><p>{ props.post.content }</p></Excerpt>
+      </Content>
+
+      <Categories>
+        {
+          props.post.categories.map((category) => (
+            <Tag key={category.id}> { category.name } </Tag>
+          )) 
+        }
+      </Categories>
     </Wrapper>
-  );
+  )
 }
 
-export default ToggleTimeline
+export default PostCard
+
+const composeDateToString = (date: Date): string => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
