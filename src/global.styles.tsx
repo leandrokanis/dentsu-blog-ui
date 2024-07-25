@@ -96,6 +96,7 @@ export const Container = styled.div`
 export const Row = styled.div`
   display: flex;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 `;
 
 export const Col = styled.div<{ span?: number }>`
@@ -104,10 +105,13 @@ export const Col = styled.div<{ span?: number }>`
   width: 100%;
   padding: 16px 8px;
 
-  ${({ span }) => span && `
-    flex: 0 0 ${(span / 12) * 100}%;
-    max-width: ${(span / 12) * 100}%;
-  `}
+  flex: 0 0 100%;
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    ${({ span }) => span && `
+      flex: 0 0 ${(span / 12) * 100}%;
+      max-width: ${(span / 12) * 100}%;
+    `}
+  }
 `;
-
-

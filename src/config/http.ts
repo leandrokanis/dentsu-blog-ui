@@ -5,7 +5,7 @@ interface AdaptAxiosRequestConfig extends AxiosRequestConfig {
 }
 
 const http: AxiosInstance = axios.create({
-  baseURL: 'https://tech-test-backend.dwsbrazil.io',
+  baseURL: '',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
