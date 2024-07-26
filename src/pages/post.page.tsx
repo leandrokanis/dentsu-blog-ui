@@ -18,6 +18,7 @@ import { IPost } from '../types';
 import { fetchPost, getPostById } from '../services';
 import PostCard from '../components/post-card';
 import { PostContext } from '../router';
+import TopBar from '../components/top-bar';
 
 const PostPage: React.FC = (): JSX.Element => {
   const { id }  = useParams()
@@ -43,7 +44,9 @@ const PostPage: React.FC = (): JSX.Element => {
 
   return (
     <Wrapper>
-      <Container>
+      <TopBar />
+
+      <Container style={{ maxWidth: '875px', padding: '0 24px' }}>
         <Row>
           <Button
             icon="arrow_back"

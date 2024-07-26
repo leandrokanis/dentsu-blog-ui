@@ -1,5 +1,6 @@
 import { createGlobalStyle, styled } from 'styled-components'
 import colors from './config/colors'
+import { breakpoints } from './config/breakpoints';
 
 export const GlobalStyle = createGlobalStyle`
   // reset
@@ -92,12 +93,22 @@ export const Container = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  padding: 0 16px;
+  height: 100%;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    padding: 0 56px;
+  }
 `;
 
 export const Row = styled.div`
   display: flex;
-  margin-bottom: 16px;
+  margin: 16px -8px;
   flex-wrap: wrap;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    margin: 0 -8px 16px;
+  }
 `;
 
 export const Col = styled.div<{ span?: number }>`
@@ -114,5 +125,17 @@ export const Col = styled.div<{ span?: number }>`
       flex: 0 0 ${(span / 12) * 100}%;
       max-width: ${(span / 12) * 100}%;
     `}
+  }
+`;
+
+export const Page = styled.div`
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: ${breakpoints.tablet}) {
+
   }
 `;

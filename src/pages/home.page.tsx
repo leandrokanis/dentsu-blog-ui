@@ -3,6 +3,7 @@ import { Wrapper } from './home.styles'
 import PostCard from '../components/post-card'
 import { Col, Container, Row } from '../global.styles'
 import { PostContext } from '../router'
+import TopBar from '../components/top-bar'
 
 const HomePage: React.FC = (): JSX.Element => {
   const posts = useContext(PostContext) 
@@ -11,6 +12,8 @@ const HomePage: React.FC = (): JSX.Element => {
 
   return (
     <Wrapper>
+      <TopBar />
+      
       <Container>
         <Row>
           {

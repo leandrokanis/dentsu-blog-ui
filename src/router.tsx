@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { HomePage, PostPage } from './pages';
-import { Container } from './global.styles';
+import { Container, Page } from './global.styles';
 import { IPost } from './types';
 import { composePosts, fetchPosts } from './services';
 
@@ -26,7 +26,7 @@ export const Router: React.FC = () => {
   }, [])
 
   return (
-    <Container style={{ display: 'flex', justifyContent: 'center' }}>
+    <Page>
       <PostContext.Provider value={posts}>
         <BrowserRouter>
           <Routes>
@@ -35,7 +35,7 @@ export const Router: React.FC = () => {
           </Routes>
         </BrowserRouter>
       </PostContext.Provider>
-    </Container>
+    </Page>
   )
 }
 
