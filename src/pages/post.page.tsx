@@ -27,7 +27,6 @@ const PostPage: React.FC = (): JSX.Element => {
   const allPosts = useContext(PostContext)
   const recentPosts = composeRecentPosts(allPosts)
 
-  
   useEffect(() => {
     if (!id) return
     const currentPost = getPostById(allPosts, id)
