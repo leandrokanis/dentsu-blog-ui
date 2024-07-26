@@ -7,7 +7,7 @@ export const mockPost = (args?: any): IPost => ({
   author: mockAuthor(),
   authorId: faker.string.uuid(),
   categories: [mockCategory(), mockCategory()],
-  content: faker.lorem.paragraph(),
+  content: faker.lorem.paragraphs(10),
   createdAt: faker.date.recent(),
   id: faker.string.uuid(),
   thumbnailUrl: faker.image.urlLoremFlickr(),

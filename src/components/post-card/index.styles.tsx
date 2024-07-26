@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 48px;
 
-  @media (min-width: 376px) {
+  @media (min-width: 768px) {
     height: 425px;
   }
 `
@@ -29,7 +29,7 @@ export const Thumbnail = styled.img`
   object-fit: cover;
   width: 100%;
 
-  @media (min-width: 376px) {
+  @media (min-width: 768px) {
     height: 196px;
   }
 `

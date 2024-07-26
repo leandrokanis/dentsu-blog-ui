@@ -71,6 +71,7 @@ export const GlobalStyle = createGlobalStyle`
 
     font-family: 'Open Sans', sans-serif;
     color: ${colors.grey[100]};
+    z-index: 10;
 
     body {
       background: ${colors.white};

@@ -1,1 +1,1 @@
-export const POSTS_ALL = `/posts.json`
+export const POSTS_ALL = `/posts`
