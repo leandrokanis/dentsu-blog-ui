@@ -1,12 +1,13 @@
 import { PostsApi } from "../api"
 import { IAuthor, ICategory, IPost } from "../types"
 import { ResponsePost } from "../types/response-post"
-// const { localStorage } = window
 
 export async function fetchPosts(): Promise<IPost[]> {
   const posts = await PostsApi.findMany()
-    // .then((posts) => { localStorage.setItem('posts', JSON.stringify(posts)) })
-    .then((posts) => composePosts(posts))
+    .then((posts) => {
+      localStorage.setItem('posts', JSON.stringify(posts))
+      return composePosts(posts)
+    })
     .catch((err) => console.error(err))
 
     return posts as IPost[]
@@ -14,14 +15,13 @@ export async function fetchPosts(): Promise<IPost[]> {
 
 export async function fetchPost(id: string): Promise<IPost> {
   const post = await PostsApi.findOne(id)
-    // .then((posts) => { localStorage.setItem('posts', JSON.stringify(posts)) })
     .then((post) => composePost(post))
     .catch((err) => console.error(err))
 
     return post as unknown as IPost
 }
 
-function composePost(post: ResponsePost): IPost {
+export function composePost(post: ResponsePost): IPost {
   return {
     author: composeAuthor(post['author']),
     authorId: post['authorId'],
@@ -35,13 +35,13 @@ function composePost(post: ResponsePost): IPost {
   }
 }
 
-const composePosts = (data: ResponsePost[]): IPost[] => {
+export const composePosts = (data: ResponsePost[]): IPost[] => {
   if (!data) return []
 
   return data.map(composePost)
 }
 
-const composeAuthor = (data: any): IAuthor => {
+export const composeAuthor = (data: any): IAuthor => {
   return {
     createdAt: new Date(data['createdAt']),
     id: data['id'],
@@ -51,7 +51,7 @@ const composeAuthor = (data: any): IAuthor => {
   }
 }
 
-const composeCategories = (data: any): ICategory[] => {
+export const composeCategories = (data: any): ICategory[] => {
   return data.map((category: any) => {
     return {
       createdAt: new Date(category['createdAt']),
@@ -61,4 +61,8 @@ const composeCategories = (data: any): ICategory[] => {
       updatedAt: new Date(category['updatedAt']),
     } as ICategory
   })
+}
+
+export function getPostById(posts: IPost[], id: string): IPost | undefined {
+  return posts.find((post) => post.id === id)
 }

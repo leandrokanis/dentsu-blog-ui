@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
   ImageAuthor,
   Info,
@@ -15,29 +15,24 @@ import { Col, Container, Row } from '../global.styles';
 import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../components/button';
 import { IPost } from '../types';
-import { fetchPost, fetchPosts } from '../services';
+import { fetchPost, getPostById } from '../services';
 import PostCard from '../components/post-card';
+import { PostContext } from '../router';
 
 const PostPage: React.FC = (): JSX.Element => {
   const { id }  = useParams()
   const navigate = useNavigate()
 
   const [post, setPost] = React.useState<IPost | null>(null)
-  const [recentPosts, setRecentPosts] = React.useState<IPost[]>([])
+  const allPosts = useContext(PostContext)
+  const recentPosts = composeRecentPosts(allPosts)
 
+  
   useEffect(() => {
     if (!id) return
-    fetchPost(id).then(setPost)
+    const currentPost = getPostById(allPosts, id)
+    currentPost ? setPost(currentPost) : fetchPost(id).then(setPost)
   }, [id])
-
-  useEffect(() => {
-    if (!post) return
-
-    fetchPosts().then((posts) => {
-      const filteredPosts = composeRecentPosts(posts)
-      setRecentPosts(filteredPosts)
-    })
-  }, [post])
 
   const createdAt = post?.createdAt.toLocaleDateString('en-US', {
     year: 'numeric',
