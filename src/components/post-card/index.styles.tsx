@@ -5,13 +5,20 @@ export const Wrapper = styled.div`
   position: relative;
   background-color: ${colors.white};
   border-radius: 16px;
-  box-shadow: 0 4px 16px #5B7BC14A;
+  box-shadow: 0 4px 16px ${colors.navy[300] + '4A'};
   height: 369px;
   width: 100%;
   padding-bottom: 48px;
+  transition: 0.2s ease-out;
 
-  @media (min-width: 376px) {
+  @media (min-width: 768px) {
     height: 425px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 4px 8px 16px ${colors.navy[300] + '4A'};
+    transform: translate(-2px, -2px) scale(1.01);
   }
 `
 
@@ -29,7 +36,7 @@ export const Thumbnail = styled.img`
   object-fit: cover;
   width: 100%;
 
-  @media (min-width: 376px) {
+  @media (min-width: 768px) {
     height: 196px;
   }
 `
@@ -63,6 +70,7 @@ export const Title = styled.h2`
   font-weight: 700;
   line-height: 28px;
   margin-bottom: 8px;
+  text-align: left;
 `
 
 export const Excerpt = styled.div`

@@ -44,6 +44,7 @@ const colors: ColorPalette = {
     400: '#9EA0A5',
     500: '#C0C2C8',
     600: '#E0E2E6',
+    700: '#FFE7EE',
   },
   red: {
     100: '#8C1038',

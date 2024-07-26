@@ -1,24 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react';
 import { Wrapper } from './home.styles'
 import PostCard from '../components/post-card'
-import { IPost } from '../types'
-import { fetchPosts } from '../services'
 import { Col, Container, Row } from '../global.styles'
+import { PostContext } from '../router'
 
 const HomePage: React.FC = (): JSX.Element => {
-  const [posts, setPosts] = React.useState<IPost[]>([])
+  const posts = useContext(PostContext) 
 
-  useEffect(() => {
-    fetchPosts()
-      .then(setPosts)
-  }, [])
+  if (!posts?.length) return <h1>Loading...</h1>
 
   return (
     <Wrapper>
       <Container>
         <Row>
           {
-            posts.map((post) => (
+            posts?.map((post) => (
               <Col key={post.id} span={4} >
                 <PostCard key={post.id} post={post} />
               </Col>

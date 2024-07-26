@@ -1,6 +1,7 @@
 import React from 'react'
 import { Content, Wrapper, Thumbnail, Info, Title, Excerpt, Categories, Tag } from './index.styles'
 import { IPost } from '../../types'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   post: IPost,
@@ -8,9 +9,14 @@ interface Props {
 
 const PostCard: React.FC<Props> = (props: Props): JSX.Element => {
   const createAtToString = composeDateToString(props.post.createdAt)
+  const navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate(`/post/${props.post.id}`)
+  }
 
   return (
-    <Wrapper>
+    <Wrapper onClick={handleNavigate}>
       <Thumbnail src={props.post.thumbnailUrl} alt={props.post.author.name} />
 
       <Content>
