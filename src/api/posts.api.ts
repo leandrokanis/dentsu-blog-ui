@@ -11,4 +11,12 @@ export const PostsApi = {
 
     return data
   },
+
+  findOne: async (id: string): Promise<ResponsePost> => {
+    const data = await http.get(`${POSTS_ALL}/${id}`)
+      .then((res) => res.data)
+      .catch((err) => console.error(err))
+
+    return data
+  },
 }

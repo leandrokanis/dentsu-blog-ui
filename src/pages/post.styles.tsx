@@ -10,9 +10,7 @@ export const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
 
-  @media (min-width: 768px) {
-
-  }
+  
 
   /* &::after {
     content: '';
@@ -32,6 +30,11 @@ export const Title = styled.h1`
   font-weight: 700;
   font-size: 24px;
   line-height: 1.33em;
+
+  @media (min-width: 768px) {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
 `
 
 export const Info = styled.div`
@@ -77,5 +80,23 @@ export const Text = styled.p`
   color: ${colors.navy[100]};
   font-size: 14px;
   line-height: 1.6em;
-  padding-bottom: 16px
+  padding-bottom: 16px;
+`
+
+export const Subtitle = styled.h2`
+  color: ${colors.navy[100]};
+  line-height: 1.33em;
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 24px;
+
+  @media (min-width: 768px) {
+    font-size: 36px;
+  }
+`
+export const Hr = styled.hr`
+  border: 0;
+  border-top: 1px solid ${colors.grey[500]};
+  margin: 16px 0 28px;
+  width: 100%;
 `
