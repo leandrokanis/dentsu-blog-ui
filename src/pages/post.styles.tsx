@@ -2,15 +2,8 @@ import styled from 'styled-components'
 import colors from '../config/colors'
 
 export const Wrapper = styled.div`
-  display: flex;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  max-width: 875px;
-  padding: 16px;
-  overflow: hidden;
-  position: relative;
-
-  
 
   /* &::after {
     content: '';

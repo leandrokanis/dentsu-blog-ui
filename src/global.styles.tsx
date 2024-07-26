@@ -93,6 +93,8 @@ export const Container = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  padding: 0 16px;
+  height: 100%;
 
   @media (min-width: ${breakpoints.tablet}) {
     padding: 0 56px;
@@ -101,7 +103,7 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  margin: 16px 0px;
+  margin: 16px -8px;
   flex-wrap: wrap;
 
   @media (min-width: ${breakpoints.tablet}) {

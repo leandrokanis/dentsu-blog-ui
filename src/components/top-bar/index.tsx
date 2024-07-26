@@ -9,7 +9,7 @@ interface Props {
 const TopBar: React.FC<Props> = () => {
   return (
     <Wrapper>
-      <Container>
+      <Container style={{ display: 'flex', alignItems: 'center' }}>
         <img src={Logo} alt="logo" />
       </Container>
     </Wrapper>
