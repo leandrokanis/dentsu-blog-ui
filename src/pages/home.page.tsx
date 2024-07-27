@@ -35,7 +35,7 @@ const HomePage: React.FC = (): JSX.Element => {
   const handleChangeFilters = (selectedOptions: string[]): void => {
     const nextFilteredPosts = posts.filter(post => {
       const categories = post.categories.map(c => c.name)
-      return selectedOptions.every(option => categories.includes(option))
+      return selectedOptions.some(option => categories.includes(option))
     })
 
     setFilteredPosts(nextFilteredPosts)
