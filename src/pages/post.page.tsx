@@ -15,7 +15,7 @@ import { Col, Container, Row } from '../global.styles';
 import { useNavigate, useParams } from 'react-router-dom'
 import Button from '../components/button';
 import { IPost } from '../types';
-import { fetchPost, getPostById } from '../services';
+import { fetchPost, getPostById, getRecentPosts, sortPostsByCreatedAt } from '../services';
 import PostCard from '../components/post-card';
 import { PostContext } from '../router';
 import TopBar from '../components/top-bar';
@@ -26,7 +26,8 @@ const PostPage: React.FC = (): JSX.Element => {
 
   const [post, setPost] = React.useState<IPost | null>(null)
   const allPosts = useContext(PostContext)
-  const recentPosts = composeRecentPosts(allPosts)
+  const newestPosts = sortPostsByCreatedAt(allPosts, 'newest')
+  const recentPosts = getRecentPosts(newestPosts)
 
   useEffect(() => {
     if (!id) return
@@ -99,10 +100,3 @@ const PostPage: React.FC = (): JSX.Element => {
 }
 
 export default PostPage
-
-const composeRecentPosts = (posts: IPost[]) => {
-  const POSTS_LIMIT = 3
-  return posts.sort((a, b) => {
-    return a.createdAt > b.createdAt ? -1 : 1;
-  }).slice(0, POSTS_LIMIT);
-}
