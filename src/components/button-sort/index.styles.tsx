@@ -20,7 +20,7 @@ export const Wrapper = styled.button`
   
   .material-symbols-outlined {
     font-size: 14px;
-    margin-right: 8px;
+    margin-left: 8px;
     font-weight: 600;
   }
     

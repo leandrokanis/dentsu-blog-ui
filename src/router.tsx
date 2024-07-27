@@ -3,18 +3,28 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { HomePage, PostPage } from './pages';
 import { Container, Page } from './global.styles';
-import { IPost } from './types';
-import { composePosts, fetchPosts } from './services';
+import { ICategory, IPost } from './types';
+import { composeCategories, composePosts, fetchPosts } from './services';
+import { fetchCategories } from './services/categories.service';
 
 export const ROUTES = {
   home: '/',
   post: '/post/:id',
 }
 
-export const PostContext = React.createContext<IPost[]>([])
+interface IBlogContext {
+  posts: IPost[]
+  categories: ICategory[]
+}
+
+export const BlogContext = React.createContext<IBlogContext>({
+  posts: [],
+  categories: [],
+})
 
 export const Router: React.FC = () => {
   const [posts, setPosts] = React.useState<IPost[]>([])
+  const [categories, setCategories] = React.useState<ICategory[]>([])
 
   useEffect(() => {
     const nextPosts = localStorage.getItem('posts')
@@ -25,16 +35,25 @@ export const Router: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const nextCategories = localStorage.getItem('categories')
+    if (nextCategories) {
+      setCategories(composeCategories(JSON.parse(nextCategories)))
+    } else {
+      fetchCategories().then(setCategories)
+    }
+  }, [])
+
   return (
     <Page>
-      <PostContext.Provider value={posts}>
+      <BlogContext.Provider value={{ posts, categories }}>
         <BrowserRouter>
           <Routes>
             <Route path={ROUTES.home} element={<HomePage />} />
             <Route path={ROUTES.post} element={<PostPage />} />
           </Routes>
         </BrowserRouter>
-      </PostContext.Provider>
+      </BlogContext.Provider>
     </Page>
   )
 }
