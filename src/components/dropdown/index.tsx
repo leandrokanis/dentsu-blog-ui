@@ -11,12 +11,12 @@ import {
 } from './index.styles'
 
 interface OptionDropdownProps {
-  children?: React.ReactNode
+  label?: string
   options: string[]
   onChange: (selectedOptions: string[]) => void
 }
 
-const Dropdown: React.FC<OptionDropdownProps> = ({ options, onChange, children }) => {
+const Dropdown: React.FC<OptionDropdownProps> = ({ options, onChange, label }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
@@ -40,7 +40,7 @@ const Dropdown: React.FC<OptionDropdownProps> = ({ options, onChange, children }
   return (
     <DropdownContainer>
       <DropdownHeader onClick={handleToggleDropdown}>
-        { children }
+        { label }
         <span className="material-symbols-outlined"> expand_more </span>
       </DropdownHeader>
 

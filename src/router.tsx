@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { HomePage, PostPage } from './pages';
-import { Container, Page } from './global.styles';
-import { ICategory, IPost } from './types';
+import { Page } from './global.styles';
+import { IAuthor, ICategory, IPost } from './types';
 import { composeCategories, composePosts, fetchPosts } from './services';
 import { fetchCategories } from './services/categories.service';
+import { composeAuthors, fetchAuthors } from './services/authors.service';
 
 export const ROUTES = {
   home: '/',
@@ -13,18 +14,21 @@ export const ROUTES = {
 }
 
 interface IBlogContext {
-  posts: IPost[]
+  authors: IAuthor[]
   categories: ICategory[]
+  posts: IPost[]
 }
 
 export const BlogContext = React.createContext<IBlogContext>({
-  posts: [],
+  authors: [],
   categories: [],
+  posts: [],
 })
 
 export const Router: React.FC = () => {
   const [posts, setPosts] = React.useState<IPost[]>([])
   const [categories, setCategories] = React.useState<ICategory[]>([])
+  const [authors, setAuthors] = React.useState<IAuthor[]>([])
 
   useEffect(() => {
     const nextPosts = localStorage.getItem('posts')
@@ -44,9 +48,18 @@ export const Router: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const nextAuthors = localStorage.getItem('authors')
+    if (nextAuthors) {
+      setAuthors(composeAuthors(JSON.parse(nextAuthors)))
+    } else {
+      fetchAuthors().then(setAuthors)
+    }
+  }, [])
+
   return (
     <Page>
-      <BlogContext.Provider value={{ posts, categories }}>
+      <BlogContext.Provider value={{ posts, categories, authors }}>
         <BrowserRouter>
           <Routes>
             <Route path={ROUTES.home} element={<HomePage />} />

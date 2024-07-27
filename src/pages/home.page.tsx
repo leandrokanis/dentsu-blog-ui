@@ -10,9 +10,11 @@ import { sortPostsByCreatedAt } from '../services'
 import Dropdown from '../components/dropdown'
 
 const HomePage: React.FC = (): JSX.Element => {
-  const { posts, categories } = useContext(BlogContext)
+  const { posts, categories, authors } = useContext(BlogContext)
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [orderBy, setOrderBy] = useState<'newest' | 'oldest'>('oldest')
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([])
   
   const handleToggleSort = useCallback(() => {
     const nextOrderBy = orderBy === 'newest' ? 'oldest' : 'newest'
@@ -24,27 +26,20 @@ const HomePage: React.FC = (): JSX.Element => {
   useEffect(() => {
     const nextFilteredPosts = sortPostsByCreatedAt([...posts], orderBy)
     setFilteredPosts(nextFilteredPosts)
-    setFilteredPosts(posts)
   }, [posts])
 
   useEffect(() => {
-    console.log({ filteredPosts })
-  }, [filteredPosts])
-
-
-  const handleChangeFilters = (selectedOptions: string[]): void => {
-    if (selectedOptions.length === 0) {
+    if (selectedAuthors.length === 0 && selectedCategories.length === 0) {
       setFilteredPosts(posts)
       return
     }
-    
-    const nextFilteredPosts = posts.filter(post => {
-      const categories = post.categories.map(c => c.name)
-      return selectedOptions.some(option => categories.includes(option))
-    })
 
-    setFilteredPosts(nextFilteredPosts)
-  }
+    const postsByCategories = filterPostsByCategories(posts, selectedCategories)
+    const postsByAuthors = filterPostsByAuthors(postsByCategories, selectedAuthors)
+    
+    setFilteredPosts(postsByAuthors)
+  }, [selectedAuthors, selectedCategories, posts])
+
 
   if (!posts?.length) return <EmptyState>Loading...</EmptyState>
   return (
@@ -57,8 +52,15 @@ const HomePage: React.FC = (): JSX.Element => {
 
           <Dropdown
             options={categories.map(c => c.name)}
-            onChange={handleChangeFilters}
-          >Categories</Dropdown>
+            onChange={setSelectedCategories}
+            label="Categories"
+          />
+
+          <Dropdown
+            options={authors.map(a => a.name)}
+            onChange={setSelectedAuthors}
+            label="Authors"
+          />
 
           <ButtonSort state={orderBy} onClick={handleToggleSort}/>
         </Row>
@@ -85,3 +87,18 @@ const HomePage: React.FC = (): JSX.Element => {
 }
 
 export default HomePage
+
+export const filterPostsByCategories = (posts: IPost[], selectedCategories: string[]) => {
+  if (selectedCategories.length === 0) return posts
+
+  return posts.filter(post => {
+    const categories = post.categories.map(c => c.name)
+    return selectedCategories.some(option => categories.includes(option))
+  })
+}
+
+export const filterPostsByAuthors = (posts: IPost[], selectedAuthors: string[]) => {
+  if (selectedAuthors.length === 0) return posts
+
+  return posts.filter(post => selectedAuthors.includes(post.author.name))
+}

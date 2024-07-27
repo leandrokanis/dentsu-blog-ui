@@ -4,7 +4,7 @@ import { ICategory } from "../types";
 export async function fetchCategories(): Promise<ICategory[]> {
   const categories = await CategoriesApi.findMany()
     .then((category) => {
-      localStorage.setItem('category', JSON.stringify(category))
+      localStorage.setItem('categories', JSON.stringify(category))
       return composeCategories(category)
     })
     .catch((err) => console.error(err))
@@ -12,7 +12,7 @@ export async function fetchCategories(): Promise<ICategory[]> {
     return categories as ICategory[]
 }
 
-export const composeCategorie = (category: any): ICategory => {
+export const composeCategory = (category: any): ICategory => {
   return {
     createdAt: new Date(category['createdAt']),
     id: category['id'],
@@ -23,6 +23,6 @@ export const composeCategorie = (category: any): ICategory => {
 }
 
 export const composeCategories = (data: any[]): ICategory[] => {
-  return data.map(composeCategorie)
+  return data.map(composeCategory)
 }
 
