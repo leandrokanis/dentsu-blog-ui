@@ -33,6 +33,11 @@ const HomePage: React.FC = (): JSX.Element => {
 
 
   const handleChangeFilters = (selectedOptions: string[]): void => {
+    if (selectedOptions.length === 0) {
+      setFilteredPosts(posts)
+      return
+    }
+    
     const nextFilteredPosts = posts.filter(post => {
       const categories = post.categories.map(c => c.name)
       return selectedOptions.some(option => categories.includes(option))
