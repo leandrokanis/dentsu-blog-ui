@@ -10,7 +10,7 @@ export interface ResponsePost {
   updatedAt: string
 }
 
-interface ResponseCategory {
+export interface ResponseCategory {
   createdAt: string
   id: string
   name: string
@@ -18,7 +18,7 @@ interface ResponseCategory {
   updatedAt: string
 }
 
-interface ResponseAuthor {
+export interface ResponseAuthor {
   createdAt: string
   id: string
   name: string

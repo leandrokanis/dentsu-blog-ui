@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Wrapper } from './home.styles'
 import PostCard from '../components/post-card'
 import { Col, Container, Row } from '../global.styles'
@@ -7,11 +7,12 @@ import TopBar from '../components/top-bar'
 import ButtonSort from '../components/button-sort';
 import { IPost } from '../types';
 import { sortPostsByCreatedAt } from '../services';
+import Dropdown from '../components/dropdown';
 
 const HomePage: React.FC = (): JSX.Element => {
   const posts = useContext(PostContext)
-  const [filteredPosts, setFilteredPosts] = React.useState<IPost[]>([])
-  const [orderBy, setOrderBy] = React.useState<'newest' | 'oldest'>('oldest')
+  const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
+  const [orderBy, setOrderBy] = useState<'newest' | 'oldest'>('oldest')
   
   const handleToggleSort = useCallback(() => {
     const nextOrderBy = orderBy === 'newest' ? 'oldest' : 'newest'
@@ -25,14 +26,17 @@ const HomePage: React.FC = (): JSX.Element => {
     setFilteredPosts(nextFilteredPosts)
     setFilteredPosts(posts)
   }, [posts])
-    
+
+  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
+  
   if (!filteredPosts?.length) return <h1>Loading...</h1>
   return (
     <Wrapper>
       <TopBar />
-      
+
       <Container> 
         <Row>
+          <Dropdown categories={categories} />
           <ButtonSort state={orderBy} onClick={handleToggleSort}/>
         </Row>
 
