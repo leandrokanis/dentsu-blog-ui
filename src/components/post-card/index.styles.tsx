@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 
   @media (min-width: 768px) {
     height: 425px;
+    box-shadow: 0 4px 30px ${colors.navy[300] + '4A'};
   }
 
   &:hover {

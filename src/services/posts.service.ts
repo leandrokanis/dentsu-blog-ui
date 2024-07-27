@@ -63,6 +63,18 @@ export const composeCategories = (data: any): ICategory[] => {
   })
 }
 
-export function getPostById(posts: IPost[], id: string): IPost | undefined {
+export const  getPostById = (posts: IPost[], id: string): IPost | undefined => {
   return posts.find((post) => post.id === id)
+}
+
+export const sortPostsByCreatedAt = (posts: IPost[], order: 'newest' | 'oldest'): IPost[] => {
+  return posts.sort((a, b) => {
+    const multiplier = order === 'newest' ? -1 : 1
+    return multiplier * (a.createdAt > b.createdAt ? -1 : 1)
+  })
+}
+
+export const getRecentPosts = (posts: IPost[]): IPost[] => {
+  const LIMIT = 3
+  return posts.slice(0, LIMIT)
 }
