@@ -17,21 +17,21 @@ import Button from '../components/button';
 import { IPost } from '../types';
 import { fetchPost, getPostById, getRecentPosts, sortPostsByCreatedAt } from '../services';
 import PostCard from '../components/post-card';
-import { PostContext } from '../router';
+import { BlogContext } from '../router';
 import TopBar from '../components/top-bar';
 
 const PostPage: React.FC = (): JSX.Element => {
   const { id }  = useParams()
   const navigate = useNavigate()
+  const { posts } = useContext(BlogContext)
 
   const [post, setPost] = React.useState<IPost | null>(null)
-  const allPosts = useContext(PostContext)
-  const newestPosts = sortPostsByCreatedAt(allPosts, 'newest')
+  const newestPosts = sortPostsByCreatedAt(posts, 'newest')
   const recentPosts = getRecentPosts(newestPosts)
 
   useEffect(() => {
     if (!id) return
-    const currentPost = getPostById(allPosts, id)
+    const currentPost = getPostById(posts, id)
     currentPost ? setPost(currentPost) : fetchPost(id).then(setPost)
   }, [id])
 

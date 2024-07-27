@@ -1,16 +1,16 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Wrapper } from './home.styles'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { Wrapper, EmptyState, TitleHome } from './home.styles'
 import PostCard from '../components/post-card'
 import { Col, Container, Row } from '../global.styles'
-import { PostContext } from '../router'
+import { BlogContext } from '../router'
 import TopBar from '../components/top-bar'
-import ButtonSort from '../components/button-sort';
+import ButtonSort from '../components/button-sort'
 import { IPost } from '../types';
-import { sortPostsByCreatedAt } from '../services';
-import Dropdown from '../components/dropdown';
+import { sortPostsByCreatedAt } from '../services'
+import Dropdown from '../components/dropdown'
 
 const HomePage: React.FC = (): JSX.Element => {
-  const posts = useContext(PostContext)
+  const { posts, categories } = useContext(BlogContext)
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [orderBy, setOrderBy] = useState<'newest' | 'oldest'>('oldest')
   
@@ -27,22 +27,47 @@ const HomePage: React.FC = (): JSX.Element => {
     setFilteredPosts(posts)
   }, [posts])
 
-  const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'];
-  
-  if (!filteredPosts?.length) return <h1>Loading...</h1>
+  useEffect(() => {
+    console.log({ filteredPosts })
+  }, [filteredPosts])
+
+
+  const handleChangeFilters = (selectedOptions: string[]): void => {
+    const nextFilteredPosts = posts.filter(post => {
+      const categories = post.categories.map(c => c.name)
+      return selectedOptions.every(option => categories.includes(option))
+    })
+
+    setFilteredPosts(nextFilteredPosts)
+  }
+
+  if (!posts?.length) return <EmptyState>Loading...</EmptyState>
   return (
     <Wrapper>
       <TopBar />
 
       <Container> 
-        <Row>
-          <Dropdown categories={categories} />
+        <Row style={{ justifyContent: 'space-between', padding: '0 8px' }}>
+          <TitleHome>DWS blog</TitleHome>
+
+          <Dropdown
+            options={categories.map(c => c.name)}
+            onChange={handleChangeFilters}
+          >Categories</Dropdown>
+
           <ButtonSort state={orderBy} onClick={handleToggleSort}/>
         </Row>
 
         <Row>
           {
-            filteredPosts?.map((post) => (
+            filteredPosts?.length === 0 && (
+              <EmptyState>
+                No posts found
+              </EmptyState>
+            )
+          }
+
+          { filteredPosts?.map((post) => (
               <Col key={post.id} span={4} >
                 <PostCard key={post.id} post={post} />
               </Col>

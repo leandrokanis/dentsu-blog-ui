@@ -2,58 +2,70 @@ import React, { useState } from 'react'
 import { 
   DropdownContainer,
   DropdownHeader,
-  Caret,
   DropdownMenu,
   MenuItem,
-  SelectedCategories,
-  CategoryPill,
+  SelectedOptions,
+  OptionPill,
   RemoveButton,
+  Overlay,
 } from './index.styles'
 
-interface CategoryDropdownProps {
-  categories: string[]
+interface OptionDropdownProps {
+  children?: React.ReactNode
+  options: string[]
+  onChange: (selectedOptions: string[]) => void
 }
 
-const Dropdown: React.FC<CategoryDropdownProps> = ({ categories }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+const Dropdown: React.FC<OptionDropdownProps> = ({ options, onChange, children }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen)
   }
 
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategories([...selectedCategories, category])
+  const handleOptionClick = (option: string) => {
+    const nextSelectedOptions = [...selectedOptions, option]
+    setSelectedOptions(nextSelectedOptions)
+    onChange(nextSelectedOptions)
+    setIsOpen(false)
   }
 
-  const handleRemoveCategory = (category: string) => {
-    setSelectedCategories(selectedCategories.filter(c => c !== category))
+  const handleRemoveOption = (option: string) => {
+    const nextSelectedOptions = selectedOptions.filter(o => o !== option)
+    setSelectedOptions(nextSelectedOptions)
+    onChange(nextSelectedOptions)
   }
 
   return (
     <DropdownContainer>
       <DropdownHeader onClick={handleToggleDropdown}>
-        Category <span className="material-symbols-outlined"> expand_more </span>
+        { children }
+        <span className="material-symbols-outlined"> expand_more </span>
       </DropdownHeader>
 
       <DropdownMenu isOpen={isOpen}>
-        {categories.map(category => (
-          <MenuItem key={category} onClick={() => handleCategoryClick(category)}>
-            {category}
+        {options.map(option => (
+          <MenuItem key={option} onClick={() => handleOptionClick(option)}>
+            {option}
           </MenuItem>
         ))}
       </DropdownMenu>
 
-      {selectedCategories.length > 0 && (
-        <SelectedCategories>
-          {selectedCategories.map(category => (
-            <CategoryPill key={category}>
-              {category}
-              <RemoveButton onClick={() => handleRemoveCategory(category)}>X</RemoveButton>
-            </CategoryPill>
+      {selectedOptions.length > 0 && (
+        <SelectedOptions>
+          {selectedOptions.map(option => (
+            <OptionPill key={option}>
+              {option}
+              <RemoveButton onClick={() => handleRemoveOption(option)}>
+                <span className="material-symbols-outlined"> close </span>
+              </RemoveButton>
+            </OptionPill>
           ))}
-        </SelectedCategories>
+        </SelectedOptions>
       )}
+
+      <Overlay isOpen={isOpen} onClick={handleToggleDropdown} />
     </DropdownContainer>
   )
 }

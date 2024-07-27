@@ -107,7 +107,7 @@ export const Row = styled.div`
   flex-wrap: wrap;
 
   @media (min-width: ${breakpoints.tablet}) {
-    margin: 0 -8px 16px;
+    margin: 16px -8px;
   }
 `;
 
