@@ -34,7 +34,7 @@ export const Wrapper = styled.button`
   }
 
   &.is-secondary {
-    background-color: ${colors.white};
+    background-color: transparent;
     border: 1px solid ${colors.red[200]};
 
     span {
@@ -44,5 +44,10 @@ export const Wrapper = styled.button`
     &:hover, &:active  {
       background-color: ${colors.grey[700]};
     }
+  }
+
+  &.is-full {
+    width: 100%;
+    justify-content: center;
   }
 `

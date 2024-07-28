@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import colors from '../config/colors'
+import { breakpoints } from '../config/breakpoints'
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -10,7 +11,7 @@ export const Wrapper = styled.div`
     position: absolute;
     width: 1282px;
     height: 1282px;
-    background: radial-gradient(closest-side, ${colors.blue[200]}, ${colors.white + '00'});
+    background: radial-gradient(closest-side, ${colors.blue[200]}, ${colors.grey[800] + '00'});
     opacity: 0.4;
     z-index: 1;
     top: 50%;
@@ -23,16 +24,19 @@ export const Title = styled.h1`
   font-weight: 700;
   font-size: 24px;
   line-height: 1.33em;
+  margin-top: 24px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.tablet}) {
     font-size: 56px;
-    margin-bottom: 16px;
+    margin-bottom: 0;
+    margin-top: 0;
   }
 `
 
 export const Info = styled.div`
   display: flex;
   gap: 8px;
+  padding: 0 12px;
 `
 
 export const ImageAuthor = styled.img`
@@ -63,9 +67,11 @@ export const Thumbnail = styled.img`
   object-fit: cover;
   margin-bottom: 24px;
   border-radius: 8px;
+  margin-top: 8px;
 
-  @media (min-width: 768px) {
+  @media (min-width: ${breakpoints.tablet}) {
     height: 383px;
+    margint-top: 0;
   }
 `
 
@@ -79,17 +85,18 @@ export const Text = styled.p`
 export const Subtitle = styled.h2`
   color: ${colors.navy[100]};
   line-height: 1.33em;
-  margin-bottom: 16px;
+  margin-bottom: -8px;
   font-weight: 600;
   font-size: 24px;
-
-  @media (min-width: 768px) {
-    font-size: 36px;
-  }
-`
-export const Hr = styled.hr`
-  border: 0;
+  display: block;
   border-top: 1px solid ${colors.grey[500]};
-  margin: 16px 0 28px;
+  padding-top: 28px;
   width: 100%;
+  margin-top: 12px;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    font-size: 36px;
+    margin-top: 12px;
+    padding-top: 48px;
+  }
 `

@@ -3,7 +3,7 @@ import colors from '../../config/colors'
 
 export const Wrapper = styled.div`
   position: relative;
-  background-color: ${colors.white};
+  background-color: ${colors.grey[800]};
   border-radius: 16px;
   box-shadow: 0 4px 16px ${colors.navy[300] + '4A'};
   height: 369px;

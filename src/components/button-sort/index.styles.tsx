@@ -32,6 +32,6 @@ export const Wrapper = styled.button`
 
   &:hover, &:active  {
     background-color: ${colors.teal[200]};
-    color: ${colors.white};
+    color: ${colors.grey[800]};
   }
 `

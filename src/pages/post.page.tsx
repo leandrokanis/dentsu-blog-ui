@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react'
 import {
   ImageAuthor,
   Info,
-  Hr,
   LabelAuthor,
   LabelDate,
   Subtitle,
@@ -47,53 +46,61 @@ const PostPage: React.FC = (): JSX.Element => {
     <Wrapper>
       <TopBar />
 
-      <Container style={{ maxWidth: '875px', padding: '0 24px' }}>
+      <Container>
         <Row>
-          <Button
-            icon="arrow_back"
-            variant='secondary'
-            onClick={() => navigate('/')}
-          >Back</Button>
-        </Row>
+          <Col span={2}>
+            <Button
+              icon="arrow_back"
+              variant='secondary'
+              onClick={() => navigate('/')}
+            >
+              Back
+            </Button>
+          </Col>
 
-        <Row>
-          <Title>{ post.title }</Title>
-        </Row>
+          <Col span={8}>
+            <Title>{ post.title }</Title>
 
-        <Row>
-          <Info>
-            <ImageAuthor src={ post.author.profilePicture } alt={ post.author.name } />
+            <Row>
+              <Info>
+                <ImageAuthor src={ post.author.profilePicture } alt={ post.author.name } />
 
-            <div>
-              <LabelAuthor>Writtern by: <span>{ post.author.name }</span></LabelAuthor>
-              <LabelDate> { createdAt } </LabelDate>
-            </div>
-          </Info>
-        </Row>
+                <div>
+                  <LabelAuthor>Writtern by: <span>{ post.author.name }</span></LabelAuthor>
+                  <LabelDate> { createdAt } </LabelDate>
+                </div>
+              </Info>
+            </Row>
 
-        <Row>
-          <Thumbnail src={ post.thumbnailUrl } alt={ post.title } />
+            <Row>
+              <Col>
+                <Thumbnail src={ post.thumbnailUrl } alt={ post.title } />
 
-          <Text>{ post.content }</Text>
-        </Row>
+                <Text>{ post.content }</Text>
+              </Col>
+            </Row>
 
-          {
-            recentPosts?.length > 0 && (
-              <Row>
-                <Hr />
-                <Subtitle>Latest articles</Subtitle>
+              {
+                recentPosts?.length > 0 && (
                   <Row>
-                    {
-                      recentPosts.map((post) => (
-                        <Col key={post.id} span={4} >
-                          <PostCard key={post.id} post={post} />
-                        </Col>
-                      ))
-                    }
+                    <Col>
+                      <Subtitle>Latest articles</Subtitle>
+                      
+                      <Row>
+                        {
+                          recentPosts.map((post) => (
+                            <Col key={post.id} span={4} >
+                              <PostCard key={post.id} post={post} />
+                            </Col>
+                          ))
+                        }
+                      </Row>
+                    </Col>
                   </Row>
-              </Row>
-            )
-          }
+                )
+              }
+          </Col>
+        </Row>
       </Container>
     </Wrapper >
   )

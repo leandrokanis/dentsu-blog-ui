@@ -75,7 +75,7 @@ export const GlobalStyle = createGlobalStyle`
     z-index: 10;
 
     body {
-      background: ${colors.white};
+      background: ${colors.grey[800]};
     }
   }
 
@@ -108,7 +108,7 @@ export const Container = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  margin: 0 -12px;
+  margin: 16px -12px 0;
   flex-wrap: wrap;
 
   @media (min-width: ${breakpoints.tablet}) {
@@ -139,8 +139,9 @@ export const Page = styled.div`
   margin-left: auto;
   display: flex;
   justify-content: center;
+  background-color: ${colors.white};
 
   @media (min-width: ${breakpoints.tablet}) {
-
+    background-color: ${colors.grey[800]};
   }
 `

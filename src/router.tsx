@@ -16,6 +16,7 @@ export const ROUTES = {
 interface IBlogContext {
   authors: IAuthor[]
   categories: ICategory[]
+  isDesktop: boolean
   posts: IPost[]
 }
 
@@ -23,12 +24,26 @@ export const BlogContext = React.createContext<IBlogContext>({
   authors: [],
   categories: [],
   posts: [],
+  isDesktop: false,
 })
 
 export const Router: React.FC = () => {
   const [posts, setPosts] = React.useState<IPost[]>([])
   const [categories, setCategories] = React.useState<ICategory[]>([])
   const [authors, setAuthors] = React.useState<IAuthor[]>([])
+  const [isDesktop, setIsDesktop] = React.useState<boolean>(false)
+
+  const handleCheckDevice = () => {
+    const BREAKPOINT = 768
+    const nextIsDesktop = window.innerWidth >= BREAKPOINT
+    setIsDesktop(nextIsDesktop)
+  }
+
+  window.addEventListener('resize', handleCheckDevice)
+
+  useEffect(() => {
+    handleCheckDevice()
+  }, [])
 
   useEffect(() => {
     const nextPosts = localStorage.getItem('posts')
@@ -59,7 +74,7 @@ export const Router: React.FC = () => {
 
   return (
     <Page>
-      <BlogContext.Provider value={{ posts, categories, authors }}>
+      <BlogContext.Provider value={{ posts, categories, authors, isDesktop }}>
         <BrowserRouter>
           <Routes>
             <Route path={ROUTES.home} element={<HomePage />} />
@@ -72,3 +87,4 @@ export const Router: React.FC = () => {
 }
 
 export default Router
+

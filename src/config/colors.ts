@@ -45,13 +45,14 @@ const colors: ColorPalette = {
     500: '#C0C2C8',
     600: '#E0E2E6',
     700: '#FFE7EE',
+    800: '#F0F0F2',
   },
   red: {
     100: '#8C1038',
     200: '#D31450',
   },
   pink: '#EF4C84',
-  white: '#F0F0F2'
+  white: '#FFFFFF',
 }
 
 export default colors

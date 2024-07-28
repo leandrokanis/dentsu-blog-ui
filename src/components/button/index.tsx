@@ -6,6 +6,7 @@ interface Props {
   onClick?: () => void
   children?: React.ReactNode
   variant: 'primary' | 'secondary'
+  isFull?: boolean
 }
 
 const Button: React.FC<Props> = (props: Props) => {
@@ -13,7 +14,7 @@ const Button: React.FC<Props> = (props: Props) => {
     <Wrapper
       onClick={props.onClick}
       type="button"
-      className={`is-${props.variant}`}
+      className={`is-${props.variant}` + (props.isFull ? ' is-full' : '')}
     >
       {props.icon &&  <span className="material-symbols-outlined"> arrow_back </span>}
 

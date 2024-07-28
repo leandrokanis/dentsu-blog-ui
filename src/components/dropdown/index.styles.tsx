@@ -14,7 +14,7 @@ export const DropdownHeader = styled.div`
   display: flex;
   align-items: center;
   height: 32px;
-  background-color: white;
+  background-color: ${colors.white};
   font-size: 12px;
   color: ${colors.red[200]};
   font-weight: 600;
@@ -41,7 +41,7 @@ export const DropdownMenu = styled.ul<DropdownMenuProps>`
   top: 100%;
   left: 0;
   width: 314px;
-  background-color: ${colors.white};
+  background-color: ${colors.grey[800]};
   box-shadow: 0px 4px 30px 0px ${colors.navy[300] + '3D'};
   list-style: none;
   padding: 16px;

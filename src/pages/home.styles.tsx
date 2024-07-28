@@ -28,3 +28,16 @@ export const TitleHome = styled.h1`
     display: block;
   }
 `
+
+interface FiltersProps {
+  hasfilters: boolean
+}
+
+export const Filters = styled.div<FiltersProps>`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: ${props => props.hasfilters ? '16px' : '0'};
+  z-index: 21;
+`
