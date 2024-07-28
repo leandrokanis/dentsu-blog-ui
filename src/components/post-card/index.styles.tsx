@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 48px;
   transition: 0.2s ease-out;
+  margin-bottom: 24px;
 
   @media (min-width: 768px) {
     height: 425px;
@@ -19,7 +20,7 @@ export const Wrapper = styled.div`
   &:hover {
     cursor: pointer;
     box-shadow: 4px 8px 16px ${colors.navy[300] + '4A'};
-    transform: translate(-2px, -2px) scale(1.01);
+    transform: translate(-6px, -6px) scale(1.01);
   }
 `
 

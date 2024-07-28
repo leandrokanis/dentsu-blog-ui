@@ -10,13 +10,13 @@ import {
   Overlay,
 } from './index.styles'
 
-interface OptionDropdownProps {
+interface DropdownProps {
   label?: string
   options: string[]
   onChange: (selectedOptions: string[]) => void
 }
 
-const Dropdown: React.FC<OptionDropdownProps> = ({ options, onChange, label }) => {
+const Dropdown: React.FC<DropdownProps> = ({ options, onChange, label }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 

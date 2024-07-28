@@ -97,25 +97,30 @@ export const Container = styled.div`
   height: 100%;
 
   @media (min-width: ${breakpoints.tablet}) {
-    padding: 0 56px;
+    padding: 0 32px;
   }
-`;
+
+  @media (min-width: ${breakpoints.desktop}) {
+    padding: 0;
+    max-width: 1328px; 
+  }
+`
 
 export const Row = styled.div`
   display: flex;
-  margin: 16px -8px;
+  margin: 0 -12px;
   flex-wrap: wrap;
 
   @media (min-width: ${breakpoints.tablet}) {
-    margin: 16px -8px;
+    margin: 32px -12px 0;
   }
-`;
+`
 
 export const Col = styled.div<{ span?: number }>`
   display: inline-block;
   position: relative;
   width: 100%;
-  padding: 16px 8px;
+  padding: 0 12px;
 
   flex: 0 0 100%;
   max-width: 100%;
@@ -126,7 +131,7 @@ export const Col = styled.div<{ span?: number }>`
       max-width: ${(span / 12) * 100}%;
     `}
   }
-`;
+`
 
 export const Page = styled.div`
   width: 100%;
@@ -138,4 +143,4 @@ export const Page = styled.div`
   @media (min-width: ${breakpoints.tablet}) {
 
   }
-`;
+`

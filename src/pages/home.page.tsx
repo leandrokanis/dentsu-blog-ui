@@ -8,6 +8,7 @@ import ButtonSort from '../components/button-sort'
 import { IPost } from '../types';
 import { sortPostsByCreatedAt } from '../services'
 import Dropdown from '../components/dropdown'
+import MultiFilter from '../components/multi-filter'
 
 const HomePage: React.FC = (): JSX.Element => {
   const { posts, categories, authors } = useContext(BlogContext)
@@ -66,20 +67,28 @@ const HomePage: React.FC = (): JSX.Element => {
         </Row>
 
         <Row>
-          {
-            filteredPosts?.length === 0 && (
-              <EmptyState>
-                No posts found
-              </EmptyState>
-            )
-          }
+          <Col span={3}>
+            <MultiFilter categories={categories} authors={authors} />
+          </Col>
 
-          { filteredPosts?.map((post) => (
-              <Col key={post.id} span={4} >
-                <PostCard key={post.id} post={post} />
-              </Col>
-            ))
-          }
+          <Col span={9}>
+            <Row style={{ marginTop: '0' }}>
+              {
+                filteredPosts?.length === 0 && (
+                  <EmptyState>
+                    No posts found
+                  </EmptyState>
+                )
+              }
+
+              { filteredPosts?.map((post) => (
+                  <Col key={post.id} span={4} >
+                    <PostCard key={post.id} post={post} />
+                  </Col>
+                ))
+              }
+            </Row>
+          </Col>  
         </Row>
       </Container>
     </Wrapper >

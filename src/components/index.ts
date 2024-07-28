@@ -1,5 +1,6 @@
 export * from './button-sort'
 export * from './button'
+export * from './dropdown'
+export * from './multi-filter'
 export * from './post-card'
 export * from './top-bar'
-export * from './dropdown'
